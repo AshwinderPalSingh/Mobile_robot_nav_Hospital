@@ -1,10 +1,12 @@
-# 🏥 Hospital Delivery Bot
+# Hospital Delivery Bot
+
+**Repository:** [https://github.com/AshwinderPalSingh/Mobile_robot_nav_Hospital](https://github.com/AshwinderPalSingh/Mobile_robot_nav_Hospital)
 
 > An autonomous mobile robot built with **ROS 2 Humble** + **Gazebo Classic 11** that navigates a simulated hospital ward, avoids dynamic human obstacles in real time, and delivers items between rooms — powered by the full **Nav2** stack.
 
 ---
 
-## 📸 Demo
+## Demo
 
 > **Replace the placeholder below with your recorded GIF (Gazebo + RViz side by side).**
 
@@ -27,7 +29,7 @@
 
 ---
 
-## 🗺️ SLAM Map
+## SLAM Map
 
 > **Replace the placeholder below with your saved SLAM map screenshot.**
 
@@ -50,27 +52,27 @@
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Robot Hardware Spec (Simulated)](#-robot-hardware-spec-simulated)
-- [Software Architecture](#-software-architecture)
-- [World & Environment](#-world--environment)
-- [Project Structure](#-project-structure)
-- [Dependencies](#-dependencies)
-- [Build & Install](#-build--install)
-- [Running the Simulation](#-running-the-simulation)
+- [Overview](#overview)
+- [Robot Hardware Spec (Simulated)](#robot-hardware-spec-simulated)
+- [Software Architecture](#software-architecture)
+- [World & Environment](#world--environment)
+- [Project Structure](#project-structure)
+- [Dependencies](#dependencies)
+- [Build & Install](#build--install)
+- [Running the Simulation](#running-the-simulation)
   - [Phase 1 — SLAM Mapping](#phase-1--slam-mapping-build-the-map-first)
   - [Phase 2 — Autonomous Navigation](#phase-2--autonomous-navigation-uses-the-saved-map)
-- [Sending Navigation Goals](#-sending-navigation-goals)
-- [ROS 2 Topics & Nodes](#-ros-2-topics--nodes)
-- [Nav2 Configuration Details](#-nav2-configuration-details)
-- [Dynamic Human Obstacles](#-dynamic-human-obstacles)
-- [Troubleshooting](#-troubleshooting)
+- [Sending Navigation Goals](#sending-navigation-goals)
+- [ROS 2 Topics & Nodes](#ros-2-topics--nodes)
+- [Nav2 Configuration Details](#nav2-configuration-details)
+- [Dynamic Human Obstacles](#dynamic-human-obstacles)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
-## 🔍 Overview
+## Overview
 
 The **Hospital Delivery Bot** is a fully simulated autonomous ground vehicle designed to operate inside a multi-room hospital ward. It demonstrates the complete robotics autonomy pipeline:
 
@@ -85,7 +87,7 @@ The whole system runs entirely in simulation on a single machine — no physical
 
 ---
 
-## 🤖 Robot Hardware Spec (Simulated)
+## Robot Hardware Spec (Simulated)
 
 | Component | Details |
 |-----------|---------|
@@ -103,7 +105,7 @@ The robot URDF is defined in [`urdf/hospital_bot.urdf.xacro`](urdf/hospital_bot.
 
 ---
 
-## 🏗️ Software Architecture
+## Software Architecture
 
 ```
 Gazebo Classic 11
@@ -140,7 +142,7 @@ RViz 2
 
 ---
 
-## 🏨 World & Environment
+## World & Environment
 
 The hospital ward (`worlds/hospital_ward.world`) is a hand-crafted **16 m × 12 m** SDF environment:
 
@@ -156,11 +158,11 @@ The hospital ward (`worlds/hospital_ward.world`) is a hand-crafted **16 m × 12 
 | `walking_doctor` | Doctor | Lower rooms (L-shaped route) |
 | `walking_visitor` | Visitor | East side (North ↔ South) |
 
-> ⚠️ The actors are **purely dynamic** — they are **not baked into the SLAM map**. Nav2's local costmap detects them in real time via `/scan` and routes around them on the fly.
+> The actors are **purely dynamic** — they are **not baked into the SLAM map**. Nav2's local costmap detects them in real time via `/scan` and routes around them on the fly.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 hospital_delivery_bot/
@@ -196,7 +198,7 @@ hospital_delivery_bot/
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 | Package | Purpose |
 |---------|---------|
@@ -231,7 +233,7 @@ sudo apt install -y \
 
 ---
 
-## 🔧 Build & Install
+## Build & Install
 
 ```bash
 # 1. Clone into your workspace src/
@@ -250,7 +252,7 @@ source ~/Desktop/hospital_ws/install/setup.bash
 
 ---
 
-## 🚀 Running the Simulation
+## Running the Simulation
 
 ### Phase 1 — SLAM Mapping *(build the map first)*
 
@@ -302,7 +304,7 @@ This single command starts:
 
 ---
 
-## 🎯 Sending Navigation Goals
+## Sending Navigation Goals
 
 ### Via RViz *(easiest)*
 1. Click **"2D Goal Pose"** in the RViz toolbar (or press **G**)
@@ -333,7 +335,7 @@ Expected output:
 
 ---
 
-## 📡 ROS 2 Topics & Nodes
+## ROS 2 Topics & Nodes
 
 ### Key Topics
 
@@ -364,7 +366,7 @@ map
 
 ---
 
-## ⚙️ Nav2 Configuration Details
+## Nav2 Configuration Details
 
 The full parameter file lives at [`config/nav2_params.yaml`](config/nav2_params.yaml). Key tuning decisions:
 
@@ -384,7 +386,7 @@ The full parameter file lives at [`config/nav2_params.yaml`](config/nav2_params.
 
 ---
 
-## 🚶 Dynamic Human Obstacles
+## Dynamic Human Obstacles
 
 The world contains **4 animated walking actors** using Gazebo's built-in `walk.dae` skinned mesh. They are **not part of the static map** — SLAM was run before they start affecting the environment meaningfully. Nav2's **VoxelLayer** in the local costmap sees them via `/scan` and routes around them in real time.
 
@@ -399,7 +401,7 @@ Each actor has a staggered `delay_start` (0 s, 2 s, 4 s, 6 s) so they don't all 
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### `command not found: ros2`
 You need to source ROS 2 and the workspace:
@@ -438,7 +440,7 @@ ros2 launch hospital_delivery_bot navigation.launch.py \
 
 ---
 
-## 📄 License
+## License
 
 Apache 2.0 — see [LICENSE](LICENSE) for details.
 
