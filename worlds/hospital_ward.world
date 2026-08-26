@@ -432,5 +432,156 @@
       </script>
     </actor>
 
+    <!-- ================================================================ -->
+    <!-- Additional walking humans — dynamic obstacles for Nav2 to avoid. -->
+    <!-- All use the same bundled walk.dae mesh.  Each patrols a          -->
+    <!-- different corridor / room area so the robot encounters people    -->
+    <!-- throughout the ward.  These do NOT affect the saved SLAM map.    -->
+    <!-- ================================================================ -->
+
+    <!-- Person 2: Nurse patrolling the upper rooms (y ≈ 4) -->
+    <actor name="walking_nurse">
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>2.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-5 4 1.0 0 0 1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>6</time>
+            <pose>-5 5.5 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>14</time>
+            <pose>5 5.5 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>20</time>
+            <pose>5 4 1.0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>20.5</time>
+            <pose>5 4 1.0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>28.5</time>
+            <pose>-5 4 1.0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>29</time>
+            <pose>-5 4 1.0 0 0 1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <!-- Person 3: Doctor walking in the lower rooms (y ≈ -4) -->
+    <actor name="walking_doctor">
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>4.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-5 -4 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>8</time>
+            <pose>-2 -4 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>8.5</time>
+            <pose>-2 -4 1.0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>12.5</time>
+            <pose>-2 -5.5 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>20.5</time>
+            <pose>4 -5.5 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>21</time>
+            <pose>4 -5.5 1.0 0 0 1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>25</time>
+            <pose>4 -4 1.0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>33</time>
+            <pose>-5 -4 1.0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>33.5</time>
+            <pose>-5 -4 1.0 0 0 0</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <!-- Person 4: Visitor walking up/down the east side (x ≈ 6) -->
+    <actor name="walking_visitor">
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>6.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>6.5 -5 1.0 0 0 1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>10</time>
+            <pose>6.5 5 1.0 0 0 1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>10.5</time>
+            <pose>6.5 5 1.0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>20.5</time>
+            <pose>6.5 -5 1.0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>21</time>
+            <pose>6.5 -5 1.0 0 0 1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
   </world>
 </sdf>
