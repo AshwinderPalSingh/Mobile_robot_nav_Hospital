@@ -1,0 +1,436 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="hospital_ward">
+
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ================================================================ -->
+    <!-- Reusable wall macro (expanded by hand below since SDF has no     -->
+    <!-- macro system) — walls are 2.5m tall, 0.15m thick                 -->
+    <!-- ================================================================ -->
+
+    <!-- Outer perimeter: 16m x 12m ward, centered at origin -->
+    <model name="wall_outer_north">
+      <static>true</static>
+      <pose>0 6 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>16 0.15 2.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>16 0.15 2.5</size></box></geometry>
+          <material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_outer_south">
+      <static>true</static>
+      <pose>0 -6 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>16 0.15 2.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>16 0.15 2.5</size></box></geometry>
+          <material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_outer_east">
+      <static>true</static>
+      <pose>8 0 1.25 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>12 0.15 2.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>12 0.15 2.5</size></box></geometry>
+          <material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_outer_west">
+      <static>true</static>
+      <pose>-8 0 1.25 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>12 0.15 2.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>12 0.15 2.5</size></box></geometry>
+          <material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Central corridor divider walls, each with a gap (doorway) for the robot to pass -->
+    <model name="wall_div_1a">
+      <static>true</static>
+      <pose>-4 2 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>6 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_div_1b">
+      <static>true</static>
+      <pose>2 2 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>4 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>4 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_div_2a">
+      <static>true</static>
+      <pose>-6 -2 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>4 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>4 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_div_2b">
+      <static>true</static>
+      <pose>0 -2 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>6 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_div_2c">
+      <static>true</static>
+      <pose>5 -2 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>4 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>4 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- A couple of room-corner walls to break up long straight corridors -->
+    <model name="wall_room_1">
+      <static>true</static>
+      <pose>-7 4.2 1.25 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>3.5 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>3.5 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_room_2">
+      <static>true</static>
+      <pose>7 4.2 1.25 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>3.5 0.15 2.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>3.5 0.15 2.5</size></box></geometry>
+          <material><ambient>0.85 0.85 0.8 1</ambient><diffuse>0.85 0.85 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ================================================================ -->
+    <!-- Freestanding obstacles (multiple shapes) -- gives the lidar/SLAM -->
+    <!-- distinct features to latch onto beyond flat walls, and gives     -->
+    <!-- teleop something to navigate around in each room + the corridor -->
+    <!-- ================================================================ -->
+
+    <!-- Upper-left room: box (e.g. a cart/table) -->
+    <model name="obstacle_box_1">
+      <static>true</static>
+      <pose>-5 4 0.4 0 0 0.3</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.6 0.6 0.8</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>0.6 0.6 0.8</size></box></geometry>
+          <material><ambient>0.7 0.2 0.2 1</ambient><diffuse>0.7 0.2 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Upper-middle room: cylinder (e.g. an IV pole / pillar) -->
+    <model name="obstacle_cyl_1">
+      <static>true</static>
+      <pose>2 4 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><cylinder><radius>0.2</radius><length>1.0</length></cylinder></geometry></collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.2</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0.2 0.4 0.7 1</ambient><diffuse>0.2 0.4 0.7 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Upper-right room: sphere (e.g. a large ball/tank) -->
+    <model name="obstacle_sphere_1">
+      <static>true</static>
+      <pose>6 4 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><sphere><radius>0.3</radius></sphere></geometry></collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.3</radius></sphere></geometry>
+          <material><ambient>0.2 0.6 0.2 1</ambient><diffuse>0.2 0.6 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Lower-left room: box (e.g. a bed) -->
+    <model name="obstacle_box_2">
+      <static>true</static>
+      <pose>-6 -4 0.4 0 0 -0.4</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.9 0.5 0.8</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>0.9 0.5 0.8</size></box></geometry>
+          <material><ambient>0.7 0.6 0.2 1</ambient><diffuse>0.7 0.6 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Lower-middle room: cylinder (e.g. a trash bin) -->
+    <model name="obstacle_cyl_2">
+      <static>true</static>
+      <pose>-1 -4 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><cylinder><radius>0.25</radius><length>0.8</length></cylinder></geometry></collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.25</radius><length>0.8</length></cylinder></geometry>
+          <material><ambient>0.5 0.3 0.6 1</ambient><diffuse>0.5 0.3 0.6 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Lower-right room: sphere -->
+    <model name="obstacle_sphere_2">
+      <static>true</static>
+      <pose>5 -4 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><sphere><radius>0.3</radius></sphere></geometry></collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.3</radius></sphere></geometry>
+          <material><ambient>0.7 0.4 0.1 1</ambient><diffuse>0.7 0.4 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Main corridor: a couple of obstacles to navigate around while teleoping -->
+    <model name="obstacle_box_3">
+      <static>true</static>
+      <pose>-3 -1 0.4 0 0 0.6</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.5 0.5 0.8</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>0.5 0.5 0.8</size></box></geometry>
+          <material><ambient>0.3 0.5 0.3 1</ambient><diffuse>0.3 0.5 0.3 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_cyl_3">
+      <static>true</static>
+      <pose>3 0.8 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><cylinder><radius>0.2</radius><length>1.0</length></cylinder></geometry></collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.2</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0.6 0.2 0.5 1</ambient><diffuse>0.6 0.2 0.5 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Additional obstacles: more density per room + fill the sparser corridor stretches -->
+
+    <model name="obstacle_sphere_3">
+      <static>true</static>
+      <pose>2.5 5.3 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><sphere><radius>0.25</radius></sphere></geometry></collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><ambient>0.1 0.5 0.5 1</ambient><diffuse>0.1 0.5 0.5 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_box_4">
+      <static>true</static>
+      <pose>6.5 5.3 0.4 0 0 0.5</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.6 0.4 0.8</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>0.6 0.4 0.8</size></box></geometry>
+          <material><ambient>0.4 0.4 0.7 1</ambient><diffuse>0.4 0.4 0.7 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_cyl_4">
+      <static>true</static>
+      <pose>-7 -5 0.45 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><cylinder><radius>0.15</radius><length>0.9</length></cylinder></geometry></collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.15</radius><length>0.9</length></cylinder></geometry>
+          <material><ambient>0.6 0.6 0.2 1</ambient><diffuse>0.6 0.6 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_box_5">
+      <static>true</static>
+      <pose>4 -5.3 0.4 0 0 -0.3</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.7 0.4 0.8</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>0.7 0.4 0.8</size></box></geometry>
+          <material><ambient>0.6 0.3 0.3 1</ambient><diffuse>0.6 0.3 0.3 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_sphere_4">
+      <static>true</static>
+      <pose>-7 0.5 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><sphere><radius>0.25</radius></sphere></geometry></collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><ambient>0.7 0.5 0.2 1</ambient><diffuse>0.7 0.5 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_cyl_5">
+      <static>true</static>
+      <pose>6.5 -0.5 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><cylinder><radius>0.2</radius><length>1.0</length></cylinder></geometry></collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.2</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0.3 0.6 0.4 1</ambient><diffuse>0.3 0.6 0.4 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ================================================================ -->
+    <!-- Moving obstacle: a walking human actor patrolling the main       -->
+    <!-- corridor. Uses Gazebo's own bundled walk.dae skinned/animated    -->
+    <!-- mesh -- classic Gazebo gives actors an auto collision box, so    -->
+    <!-- the lidar genuinely detects it as it moves.                     -->
+    <!-- ================================================================ -->
+    <actor name="walking_person">
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>0.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-6 0 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>10</time>
+            <pose>6 0 1.0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>10.5</time>
+            <pose>6 0 1.0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>20.5</time>
+            <pose>-6 0 1.0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>21</time>
+            <pose>-6 0 1.0 0 0 0</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+  </world>
+</sdf>
