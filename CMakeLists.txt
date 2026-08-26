@@ -11,7 +11,6 @@ find_package(rclpy REQUIRED)
 install(DIRECTORY
   config
   maps
-  behavior_trees
   urdf
   launch
   worlds
