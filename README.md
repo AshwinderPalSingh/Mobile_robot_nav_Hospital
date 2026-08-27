@@ -1,6 +1,6 @@
 # Hospital Delivery Bot
 
-**Repository:** [https://github.com/AshwinderPalSingh/Mobile_robot_nav_Hospital](https://github.com/AshwinderPalSingh/Mobile_robot_nav_Hospital)
+
 
 > An autonomous mobile robot built with **ROS 2 Humble** + **Gazebo Classic 11** that navigates a simulated hospital ward, avoids dynamic human obstacles in real time, and delivers items between rooms — powered by the full **Nav2** stack.
 
@@ -8,7 +8,7 @@
 
 ## Demo
 
-> **Replace the placeholder below with your recorded GIF (Gazebo + RViz side by side).**
+
 
 <img src="media/hnavvv.gif" width="720" alt="Navigation Demo">
 ## GAZEBO Map
