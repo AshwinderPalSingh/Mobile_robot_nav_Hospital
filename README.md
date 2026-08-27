@@ -10,14 +10,14 @@
 
 > **Replace the placeholder below with your recorded GIF (Gazebo + RViz side by side).**
 
-[media/hnavvv.gif]
+<img src="media/hnavvv.gif" width="720" alt="Navigation Demo">
 ## GAZEBO Map
 
-[media/hg.jpeg]
+<img src="media/hg.jpeg" width="720" alt="Gazebo Map">
 ---
 
 ## SLAM Map
-[media/hrviz.jpeg]
+<img src="media/hrviz.jpeg" width="720" alt="SLAM">
 
 ---
 
