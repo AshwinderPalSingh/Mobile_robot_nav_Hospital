@@ -11,10 +11,11 @@
 
 
 <img src="media/hnavvv.gif" width="720" alt="Navigation Demo">
+
 ## GAZEBO Map
 
 <img src="media/hg.jpeg" width="720" alt="Gazebo Map">
----
+
 
 ## SLAM Map
 <img src="media/hrviz.jpeg" width="720" alt="SLAM">
