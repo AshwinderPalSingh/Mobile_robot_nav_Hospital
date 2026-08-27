@@ -10,45 +10,13 @@
 
 > **Replace the placeholder below with your recorded GIF (Gazebo + RViz side by side).**
 
-<!-- ============================================================
-     PASTE YOUR GIF HERE
-     Recommended: record with peek, ffmpeg, or kazam
-     Resize to ~900px wide for best GitHub rendering
-     Example:
-       ![Demo GIF](docs/demo.gif)
-     ============================================================ -->
-
-```
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│         [ INSERT GAZEBO + RVIZ GIF HERE ]           │
-│       (robot navigating with walking humans)        │
-│                                                     │
-└─────────────────────────────────────────────────────┘
-```
-
+[ GIF](media/hnavvv.gif)
+## GAZEBO Map
+[gazebo Map](media/hg.jpeg)
 ---
 
 ## SLAM Map
-
-> **Replace the placeholder below with your saved SLAM map screenshot.**
-
-<!-- ============================================================
-     PASTE YOUR SLAM MAP IMAGE HERE
-     The map was generated with slam_toolbox (online async mode)
-     and saved to maps/hospital_ward.pgm + hospital_ward.yaml
-     Example:
-       ![SLAM Map](docs/slam_map.png)
-     ============================================================ -->
-
-```
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│           [ INSERT SLAM MAP IMAGE HERE ]            │
-│    (hospital_ward.pgm rendered in RViz / image)     │
-│                                                     │
-└─────────────────────────────────────────────────────┘
-```
+[SLAM Map](media/hrviz.jpeg)
 
 ---
 
